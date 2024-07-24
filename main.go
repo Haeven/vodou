@@ -367,8 +367,8 @@ func (s *Scanner) addTokenWithLiteral(tokenType token, literal interface{}) {
 }
 
 func (s *Scanner) scanString() {
-	for s.peek() != "\"" && !s.isAtEnd() {
-		if s.peek() == "\n" {
+	for s.peek() != '\'' && !s.isAtEnd() {
+		if s.peek() == '\n' {
 			s.line++
 		}
 
