@@ -285,10 +285,22 @@ func (s *Scanner) number() {
 	s.addTokenWithLiteral(tNumber, val)
 }
 
-func (s *Scanner) isAlpha(char string) {
-	retun (char >= 'a' && c <= 'z' ||
-		c >= 'A' && c <= 'Z' ||
-        c == '_'
+func (s *Scanner) identifier() {
+	for s.isAlphaNumeric(s.peek()) {
+		s.advance()
+	}
+
+	s.addToken(tIdentifier)
+}
+
+func (s *Scanner) isAlpha(char rune) bool {
+	return char >= 'a' && char <= 'z' ||
+		char >= 'A' && char <= 'Z' ||
+		char == '_'
+}
+
+func (s *Scanner) isAlphaNumeric(char rune) bool {
+	return s.isAlpha(char) || isDigit(char)
 }
 
 // Check if next character is part of current lexeme
